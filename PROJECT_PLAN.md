@@ -14,7 +14,7 @@ The ratified constitution at `.specify/memory/constitution.md` v1.0.1 is the gov
 
 - **Offline operation:** No cloud dependency, external API, online activation, telemetry, or internet requirement for installation, licensing, daily operation, reports, or recovery.
 - **Compatibility:** Validate Windows 7 SP1 x86/x64 compatibility before committing to the final technology stack.
-- **Interface:** Professional Arabic RTL, fast keyboard-driven workflows, readable typography, and minimal resource usage.
+- **Interface:** Professional Arabic RTL with a documented design system applied consistently to every screen; light theme only; Windows system fonts only; Western digits (0–9) everywhere; usable at a minimum screen resolution of 1024×768; fast keyboard-first workflows; clear empty, loading, error and success states; and minimal resource usage. Visual quality and usability are acceptance criteria, not later polish.
 - **Point of sale:** Barcode scanning, fast product lookup, pack/strip sales, configurable conversions, multiple barcodes where required, suspended sales, returns, and receipt reprinting without duplicate transactions.
 - **Products and inventory:** Simple product entry, medicine catalog, batch-level expiry tracking, stocktaking, low-stock monitoring, near-expiry alerts, and stagnant-stock reporting.
 - **Purchasing and balances:** Suppliers, purchases, supplier balances, customer debts, partial payments, and account statements.
@@ -80,11 +80,16 @@ Define and review:
 - Audit logging and permission enforcement.
 - Date/time handling and financial calculation definitions.
 - Automated test strategy and error handling.
+- UI architecture and design system: design tokens (light-theme colour palette, type scale using Windows system fonts, 4/8-pixel spacing grid, borders, focus and status colours), Arabic RTL layout and mirroring rules, Western-digit number, date and EGP formatting, icon style, DPI-scaling strategy, and keyboard conventions (shortcuts, tab order, focus rules).
+- Layout rules for the 1024×768 minimum: usable working area, minimum window and dialog sizes, resizing behaviour, column priorities for tables, and overflow handling (truncation with full text available, wrapping, and scrolling only inside lists and tables).
+- Component inventory: buttons, inputs, search box, data table, form layout, dialogs, notifications, status badges, summary cards, simple charts, and empty/loading/error/success states.
+- Screen inventory and wireframes at 1024×768 for the priority screens: dashboard, point of sale, inventory, product management, purchases, customers and debts, reports, and settings.
 
 Acceptance criteria:
 - Architecture and database design are approved.
 - Critical invariants have automated tests.
 - Database migrations and recovery procedures are documented.
+- The design system, layout rules, component inventory, screen inventory and priority wireframes are approved by the owner.
 
 ## Phase 3: Application Shell, Users, and Configuration
 
@@ -96,10 +101,16 @@ Implement:
 - Manager, Pharmacist, and Cashier roles.
 - Permission-controlled sensitive actions.
 - Pharmacy identity, receipt settings, printer settings, and local configuration.
+- Reusable UI component library implementing the approved design system.
+- Screenshot harness that renders each screen and state at the set window sizes and DPI settings (1024×768 and 1366×768 at 100 %; 1920×1080 at 100 %, 125 % and 150 %).
+- Automated keyboard-navigation tests using the UI Automation support built into .NET Framework.
 
 Acceptance criteria:
 - Unauthorized actions are blocked at the application/service level, not merely hidden in the interface.
 - Configuration survives restart and requires no internet.
+- Every shell, login and settings screen is Arabic RTL, uses only library components, and passes the visual checklist in rendered and inspected screenshots at the set screen sizes and scaling settings, including on a Windows 7 row.
+- At 1024×768 every screen and dialog fits the working area with no clipped controls, no overlapping text and no page-level horizontal scrolling.
+- Every shell, login and settings workflow can be completed with the keyboard alone.
 
 ## Phase 4: Product Catalog and Inventory
 
@@ -119,6 +130,7 @@ Acceptance criteria:
 - Duplicate barcode conflicts are prevented.
 - Conversion and expiry calculations pass boundary tests.
 - Catalog provenance and redistribution rights are documented.
+- Every new screen is Arabic RTL, uses only library components, has rendered and inspected screenshots of all its states (including empty, loading, error and success, with realistic Arabic data and long names), fits the 1024×768 layout rules, passes the visual checklist, and passes its keyboard-path tests.
 
 ## Phase 5: Point of Sale and Returns
 
@@ -138,6 +150,8 @@ Acceptance criteria:
 - Failed or interrupted transactions cannot silently corrupt stock or balances.
 - Reprinting never creates another sale.
 - Returns and refunds are traceable and permission-controlled.
+- A complete sale, from scan to printed receipt, can be done without the mouse, at 1024×768.
+- Every new screen is Arabic RTL, uses only library components, has rendered and inspected screenshots of all its states (including empty, loading, error and success, with realistic Arabic data and long names), fits the 1024×768 layout rules, passes the visual checklist, and passes its keyboard-path tests.
 
 ## Phase 6: Purchases, Suppliers, and Customer Accounts
 
@@ -155,6 +169,7 @@ Acceptance criteria:
 - Partial payments and outstanding balances reconcile correctly.
 - Purchases, returns, and payments have traceable effects on inventory and accounts.
 - Financial transactions cannot be duplicated silently.
+- Every new screen is Arabic RTL, uses only library components, has rendered and inspected screenshots of all its states (including empty, loading, error and success, with realistic Arabic data and long names), fits the 1024×768 layout rules, passes the visual checklist, and passes its keyboard-path tests.
 
 ## Phase 7: Cash Shifts and Expenses
 
@@ -171,6 +186,7 @@ Acceptance criteria:
 - Expected cash is calculated from explicitly defined components.
 - Cash discrepancies are visible and auditable.
 - Closed shifts cannot be silently rewritten.
+- Every new screen is Arabic RTL, uses only library components, has rendered and inspected screenshots of all its states (including empty, loading, error and success, with realistic Arabic data and long names), fits the 1024×768 layout rules, passes the visual checklist, and passes its keyboard-path tests.
 
 ## Phase 8: Reports and Local Stock Recommendations
 
@@ -192,6 +208,8 @@ Acceptance criteria:
 - Revenue is not presented as profit.
 - Recommendations show their rationale and available data window.
 - Insufficient historical data is explicitly handled.
+- The dashboard presents summary cards, status indicators and charts whose figures reconcile with the reports, and remains readable at 1024×768.
+- Every new screen is Arabic RTL, uses only library components, has rendered and inspected screenshots of all its states (including empty, loading, error and success, with realistic Arabic data and long names), fits the 1024×768 layout rules, passes the visual checklist, and passes its keyboard-path tests.
 
 ## Phase 9: Backup, Restoration, and Offline Licensing
 
@@ -243,7 +261,7 @@ Perform:
 - Windows compatibility and low-memory tests.
 - Barcode, thermal printer, and A4 printer tests.
 - Backup/restore, interrupted-operation, and installer failure tests.
-- Arabic RTL usability testing.
+- Arabic RTL usability testing with representative pharmacy staff on the priority workflows, including at 1024×768, with task completion and error observations recorded against owner-approved targets.
 - Pilot deployment using representative pharmacy workflows.
 
 Acceptance criteria:
@@ -262,6 +280,7 @@ Acceptance criteria:
 - Make consequential technical changes only after explaining the problem, alternatives, compatibility impact, cost, and risk to the owner.
 - Do not fabricate catalog data or silently invent business rules.
 - Each phase must have measurable acceptance criteria and be reviewed before proceeding.
+- A screen is complete only when it is Arabic RTL, uses the design system's reusable components, meets the 1024×768 layout rules, has all its states rendered and inspected, and has a tested keyboard workflow. A screen is never reported as visually verified unless it was actually rendered and inspected; rendering on Windows 10/11 does not verify Windows 7 (change proposal CP-001, approved 2026-10-11).
 
 ## 5. Spec-Kit Workflow
 
