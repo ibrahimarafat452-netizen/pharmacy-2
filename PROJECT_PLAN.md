@@ -68,6 +68,8 @@ Acceptance criteria:
 - A documented compatibility decision backed by reproducible tests.
 - Any necessary technology change is explained, compared against alternatives, and approved by the owner before implementation proceeds.
 
+Deferral: under change proposal CP-002 (approved 2026-10-11), the owner deferred Phase 1 validation while Phases 2–10 proceed. Phase 1 remains NOT ACCEPTED and the technology baseline remains provisional until the unchanged Phase 1 gate returns exit 0; Windows 7 compatibility is unverified until then. No pilot deployment, customer installation or production release may occur before then; installers built before then are for internal testing only.
+
 ## Phase 2: Architecture and Data Integrity Foundation
 
 Goal: Establish a reliable foundation before implementing business workflows.
@@ -265,6 +267,7 @@ Perform:
 - Pilot deployment using representative pharmacy workflows.
 
 Acceptance criteria:
+- Phase 1 is accepted (Phase 1 gate exit 0) before the pilot deployment begins.
 - All critical workflows pass.
 - No unresolved critical data-integrity, security, or financial-accuracy defects remain.
 - Release checklist, known limitations, recovery instructions, and versioned installer are approved by the owner.
@@ -292,7 +295,7 @@ After the owner approves this plan:
 4. Save the approved specification in the correct Spec-Kit location.
 5. Generate and review its implementation plan and tasks before coding.
 6. Implement only the approved scope and validate it against its acceptance criteria.
-7. Proceed to the next phase only after the current phase passes its acceptance gate.
+7. Proceed to the next phase only after the current phase passes its acceptance gate, except that Phases 2–10 may proceed while Phase 1 validation is deferred under CP-002; that deferral never counts as Phase 1 acceptance and ends no later than the start of Phase 11.
 
 Do not generate all phase specifications at once. Work incrementally to reduce rework and unnecessary token usage.
 

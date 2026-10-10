@@ -53,6 +53,12 @@ pharmacy business feature.
 - Q: How close must three repeated low-spec measurements be to count as reliable (User Story 4,
   FR-060a)? → A: Each run within 15% of the three-run average; otherwise repeat the measurement.
 
+### Session 2026-10-11
+
+- Q: May product phases proceed while all Phase 1 testing is deferred, including checks possible
+  on the developer PC (FR-072)? → A: Yes, under change proposal CP-002: Phase 1 stays NOT
+  ACCEPTED, the gate is unchanged, no Windows 7 claim and no pilot or release before gate exit 0.
+
 ## User Scenarios & Testing *(mandatory)*
 
 The "users" of this phase are the project owner, who approves the compatibility decision, the
@@ -399,6 +405,13 @@ and re-running the evidence scripts on a second occasion reproduces a sample of 
   could affect. Full Phase 1 acceptance (FR-070) still requires those tests. If a later Windows 7
   or hardware test reveals an incompatibility, the affected Phase 2 architecture MUST be revisited
   under Article XII before implementation continues.
+- **FR-072**: The owner MAY defer Phase 1 validation, including checks possible on available
+  environments, and authorise Phases 2–10 under change proposal CP-002. While deferred: Phase 1
+  is NOT ACCEPTED and is reported as such; the Phase 1 gate and evidence rules are unchanged; no
+  Windows 7, low-spec or hardware compatibility claim is made; product code stays within the
+  technology baseline and its restrictions; and no pilot deployment, customer installation or
+  production release occurs before the gate returns exit 0 (FR-070). A later failed check is
+  handled under FR-071's revisit rule and FR-008.
 
 ### Key Entities
 
